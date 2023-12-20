@@ -1,4 +1,4 @@
-package org.Producer;
+package org.example.kafkaApplication.Producer;
 
 public class Task {
     private String taskId;
