@@ -1,22 +1,48 @@
 package org.example.kafkaApplication;
 
 
-import org.example.kafkaApplication.EventConsumer.EventConsumer;
-import org.example.kafkaApplication.Producer.Producer;
-import org.example.kafkaApplication.Consumer.Consumer;
-public class Main {
-    public static void main(String[] args) {
-        // Καλέστε τον παραγωγό
-        Producer producer = new Producer();
-        producer.runProducer();
+import java.util.Scanner;
+    public class Main {
+        public static void main(String[] args) {
+            Scanner scanner = new Scanner(System.in);
 
-        // Καλέστε τον πρώτο καταναλωτή
-        Consumer consumer = new Consumer();
-        consumer.runConsumer();
+            while (true) {
+                System.out.println("Choose an option:");
+                System.out.println("1. Run Producer");
+                System.out.println("2. Run Consumer");
+                System.out.println("3. Run EventConsumer");
+                System.out.println("0. Exit");
 
-        // Καλέστε τον δεύτερο καταναλωτή
-        EventConsumer eventConsumer = new EventConsumer();
-        eventConsumer.eventConsumer();
-        eventConsumer.toString();
+                int choice = scanner.nextInt();
+
+                if (choice == 0) {
+                    break;
+                }
+
+                switch (choice) {
+                    case 1:
+                        runCommand("cmd /c start cmd /k java -cp C:\\Users\\kosta\\Downloads\\KafkaApplication\\out\\artifacts\\ProducerMain_jar\\KafkaApplication.jar org.example.kafkaApplication.Producer.ProducerMain");
+                        break;
+                    case 2:
+                        runCommand("cmd /c start cmd /k java -cp C:\\Users\\kosta\\Downloads\\KafkaApplication\\out\\artifacts\\ConsumerMain_jar\\KafkaApplication.jar org.example.kafkaApplication.Consumer.ConsumerMain");
+                        break;
+                    case 3:
+                        runCommand("cmd /c start cmd /k java -cp C:\\Users\\kosta\\Downloads\\KafkaApplication\\out\\artifacts\\EventConsumerMain_jar\\KafkaApplication.jar org.example.kafkaApplication.EventConsumer.EventConsumerMain");
+                        break;
+                    default:
+                        System.out.println("Invalid choice");
+                }
+            }
+
+            System.out.println("Exiting the program.");
+            scanner.close();
+        }
+
+        private static void runCommand(String command) {
+            try {
+                Runtime.getRuntime().exec(command);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
-}
