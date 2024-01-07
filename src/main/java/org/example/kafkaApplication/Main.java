@@ -18,20 +18,22 @@ import java.util.Scanner;
                 if (choice == 0) {
                     break;
                 }
-
                 switch (choice) {
                     case 1:
-                        runCommand("cmd /c start cmd /k java -cp C:\\Users\\kosta\\Downloads\\KafkaApplication\\out\\artifacts\\ProducerMain_jar\\KafkaApplication.jar org.example.kafkaApplication.Producer.ProducerMain");
+                        runCommand("cmd /c start cmd /k java -cp out\\artifacts\\ProducerMain_jar\\KafkaApplication.jar org.example.kafkaApplication.Producer.ProducerMain");
                         break;
                     case 2:
-                        runCommand("cmd /c start cmd /k java -cp C:\\Users\\kosta\\Downloads\\KafkaApplication\\out\\artifacts\\ConsumerMain_jar\\KafkaApplication.jar org.example.kafkaApplication.Consumer.ConsumerMain");
+                        runCommand("cmd /c start cmd /k java -cp out\\artifacts\\ConsumerMain_jar\\KafkaApplication.jar org.example.kafkaApplication.Consumer.ConsumerMain");
                         break;
                     case 3:
-                        runCommand("cmd /c start cmd /k java -cp C:\\Users\\kosta\\Downloads\\KafkaApplication\\out\\artifacts\\EventConsumerMain_jar\\KafkaApplication.jar org.example.kafkaApplication.EventConsumer.EventConsumerMain");
+                        runCommand("cmd /c start cmd /k java -cp out\\artifacts\\EventConsumerMain_jar\\KafkaApplication.jar org.example.kafkaApplication.EventConsumer.EventConsumerMain");
                         break;
                     default:
                         System.out.println("Invalid choice");
                 }
+
+
+
             }
 
             System.out.println("Exiting the program.");

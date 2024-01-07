@@ -1,6 +1,4 @@
 package org.example.kafkaApplication.EventConsumer;
-
-
 import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -17,6 +15,7 @@ import java.util.Properties;
 public class EventConsumerMain {
     private final String bootstrapServers = "localhost:9092";
     private final String inputTopic = "task.events";
+    private final String groupId = "my-consumer-group";
 
     public static void main(String[] args) {
         new EventConsumerMain().runEventConsumer();
@@ -27,6 +26,7 @@ public class EventConsumerMain {
         consumerProperties.put("bootstrap.servers", bootstrapServers);
         consumerProperties.put("key.deserializer", StringDeserializer.class.getName());
         consumerProperties.put("value.deserializer", StringDeserializer.class.getName());
+        consumerProperties.put("group.id", groupId); // Ορίστε το group.id
 
         try (Consumer<String, String> consumer = new KafkaConsumer<>(consumerProperties);
              Producer<String, String> producer = createProducer()) {
@@ -36,10 +36,10 @@ public class EventConsumerMain {
             while (true) {
                 ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
                 records.forEach(record -> {
-                    String subjectId = extractSubjectIdFromJson(record.value());
-                    System.out.println(subjectId);
-                    String outputTopic = "subject-specific-topic-" + subjectId;
+                    String subject = extractSubjectFromJson(record.value());
+                    String outputTopic = "task.events." + subject;
                     producer.send(new ProducerRecord<>(outputTopic, record.value()));
+                    System.out.println("Message forwarded to " + outputTopic + ": " + record.value());
                 });
             }
         }
@@ -54,10 +54,9 @@ public class EventConsumerMain {
         return new KafkaProducer<>(properties);
     }
 
-    private String extractSubjectIdFromJson(String json) {
-        // Replace with the logic to extract the "subjectId" field from JSON messages
-        // In this example, a simple substring assumption is made
-        int startIndex = json.indexOf("\"subjectId\":\"") + 12;
+    private String extractSubjectFromJson(String json) {
+        // Replace with the logic to extract the "subject" field from JSON messages
+        int startIndex = json.indexOf("\"subject\":\"") + 10;
         int endIndex = json.indexOf("\"", startIndex);
         return json.substring(startIndex, endIndex);
     }
