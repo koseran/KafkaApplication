@@ -1,4 +1,4 @@
-package org.example.kafkaApplication.Consumer;
+package org.example.kafkaApplication.Json;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.common.errors.SerializationException;
