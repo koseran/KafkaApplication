@@ -1,4 +1,6 @@
 package org.example.kafkaApplication.Producer;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.kafkaApplication.JsonSerializer;
 import org.apache.kafka.clients.producer.*;
 import java.util.Properties;
@@ -16,10 +18,16 @@ public class ProducerMain {
                 String studentId = "Student" + i;
                 String subject = "Subject" + (i % 4); // 4 different work topics
                 String dateOfSubmission = "2023-01-01";
-
-                Task task = new Task(taskId, studentId, subject, dateOfSubmission);
-                ProducerRecord<String, Task> record = new ProducerRecord<>("task.events", task);
-                producer.send(record);
+                try {
+                    Task task = new Task(taskId, studentId, subject, dateOfSubmission);
+                    ObjectMapper obj = new ObjectMapper();
+                    String jsonΤask = obj.writeValueAsString(task);
+                    System.out.println(jsonΤask);
+                    ProducerRecord<String, Task> record = new ProducerRecord<>("task.events", task);
+                    producer.send(record);
+                } catch (Exception e) {
+                    System.out.println("Problem in producer");
+                }
             }
         }
     }
