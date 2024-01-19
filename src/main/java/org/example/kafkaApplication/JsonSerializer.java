@@ -23,13 +23,10 @@ public class JsonSerializer implements Serializer<Task> {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             serializedBytes = objectMapper.writeValueAsString(task).getBytes();
-            //return objectMapper.writeValueAsBytes(task);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return serializedBytes;
-
-        ///return new byte[0];
+        return serializedBytes;  
     }
 
     @Override
