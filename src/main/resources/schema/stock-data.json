@@ -1,0 +1,20 @@
+{
+  "type": "object",
+  "javaType" : "org.example.kafkaApplication.Producer.Task",
+  "properties": {
+    "taskId": {
+      "type": "string"
+    },
+    "studentId": {
+      "type": "string"
+    },
+    "subject": {
+      "type": "string"
+    },
+    "dateOfSubmission": {
+      "type": "string"
+    }
+  },
+  "required": ["taskId", "studentId", "subject", "dateOfSubmission"],
+  "additionalProperties": false
+}
