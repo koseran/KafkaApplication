@@ -1,9 +1,9 @@
 package org.example.kafkaApplication.Producer;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.example.kafkaApplication.JsonSerializer;
+import org.example.kafkaApplication.Json.JsonSerializer;
 import org.apache.kafka.clients.producer.*;
-import org.example.kafkaApplication.JsonSerializer;
+
 
 import java.util.Properties;
 
