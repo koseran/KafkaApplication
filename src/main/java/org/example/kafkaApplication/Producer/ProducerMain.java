@@ -11,6 +11,7 @@ public class ProducerMain {
         properties.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class.getName());
 
+
         try (org.apache.kafka.clients.producer.Producer<String, Task> producer = new KafkaProducer<>(properties)) {
             for (int i = 0; i < 20; i++) {
                 String taskId = "Task" + i;
@@ -31,3 +32,5 @@ public class ProducerMain {
         }
     }
 }
+
+

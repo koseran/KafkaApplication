@@ -32,4 +32,19 @@ public class Task  {
         this.dateOfSubmission = dateOfSubmission;
     }
 
+    public String getTaskId() {
+        return taskId;
+    }
+
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public String getDateOfSubmission() {
+        return dateOfSubmission;
+    }
 }

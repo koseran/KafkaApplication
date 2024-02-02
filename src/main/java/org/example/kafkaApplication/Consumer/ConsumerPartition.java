@@ -25,7 +25,7 @@ public class ConsumerPartition {
     public void runConsumer() {
         String bootstrapServers = "localhost:9092";
         String groupId = "group1";
-        String topicName = "task.events";
+        String topicName = "taskPartition";
 
         Properties properties = new Properties();
         properties.put("bootstrap.servers", bootstrapServers);
@@ -36,9 +36,8 @@ public class ConsumerPartition {
 
         Runnable consumer1Runnable = () -> {
             try (Consumer<String, Task> consumer = new KafkaConsumer<>(properties)) {
-                List<TopicPartition> partitions = Arrays.asList(new TopicPartition(topicName, 0),
-                        new TopicPartition(topicName, 1), new TopicPartition(topicName,2),new TopicPartition(topicName, 3),
-                        new TopicPartition(topicName, 4), new TopicPartition(topicName,5));
+                List<TopicPartition> partitions = Arrays.asList(new TopicPartition(topicName, 0)
+                        );
                 consumer.assign(partitions);
 
 
@@ -64,9 +63,7 @@ public class ConsumerPartition {
         // Create and run Consumer 2
         Runnable consumer2Runnable = () -> {
             try (Consumer<String, Task> consumer = new KafkaConsumer<>(properties)) {
-                List<TopicPartition> partitions = Arrays.asList(new TopicPartition(topicName, 0),
-                        new TopicPartition(topicName, 1), new TopicPartition(topicName,2),new TopicPartition(topicName, 3),
-                        new TopicPartition(topicName, 4), new TopicPartition(topicName,5));
+                List<TopicPartition> partitions = Arrays.asList(new TopicPartition(topicName, 1));
                 consumer.assign(partitions);
 
                 while (true) {
