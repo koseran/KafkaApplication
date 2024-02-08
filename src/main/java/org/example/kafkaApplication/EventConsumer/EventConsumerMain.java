@@ -35,7 +35,7 @@ public class EventConsumerMain {
         consumerProperties.put("bootstrap.servers", bootstrapServers);
         consumerProperties.put("key.deserializer", StringDeserializer.class.getName());
         consumerProperties.put("value.deserializer", JsonDeserializer.class.getName());
-        consumerProperties.put("group.id", groupId); // Ορίστε το group.id
+        consumerProperties.put("group.id", groupId);
         producerProperties.put("bootstrap.servers", bootstrapServers);
         producerProperties.put("key.serializer", StringSerializer.class.getName());
         producerProperties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class.getName());
